@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+    <style>
+      .my-form {
+        position: fixed;
+        bottom: 24px;
+        right: 80px;
+        left: 80px;
+        width: calc(100% - 160px);
+      }
+      
+      .msg-date {
+        font-size: 10px;
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Chat Messenger</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% for message in messages %}
+        <div class="d-flex {%if name == message.user%} justify-content-end {% else %} justify-content-start {% endif %} mt-5">
+          <div class="card">
+            <div class="card-body">
+              <b>{{ message.user }}:</b>
+              {{ message.content }}
+
+              <span class="msg-date">{{ message.created_at.strftime('%d.%m.%Y %H:%M') }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      <form class="input-group mb-3 my-form" action="" method="POST">
+        <input type="text" name="content" class="form-control" placeholder="Bitte gebe deine Nachricht an" />
+        <button class="btn btn-outline-secondary" type="submit">Senden</button>
+      </form>
+    </div>
+  </body>
+</html>
